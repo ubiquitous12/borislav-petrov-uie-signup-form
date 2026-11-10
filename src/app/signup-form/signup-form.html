@@ -1,0 +1,68 @@
+<section class="signup" aria-labelledby="signup-heading">
+  <header class="signup__header">
+    <h1 id="signup-heading">Customer sign-up</h1>
+    <p class="signup__description">
+      Create your account by providing your name and email address.
+    </p>
+  </header>
+
+  @if (successMessage(); as message) {
+    <p class="signup__status signup__status--success" role="status">{{ message }}</p>
+  }
+
+  @if (formError(); as error) {
+    <p class="signup__status signup__status--error" role="alert">{{ error }}</p>
+  }
+
+  <form class="signup__form" [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="field">
+      <label class="field__label" for="firstName">First name</label>
+      <input
+        id="firstName"
+        class="field__input"
+        type="text"
+        formControlName="firstName"
+        autocomplete="given-name"
+      />
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="lastName">Last name</label>
+      <input
+        id="lastName"
+        class="field__input"
+        type="text"
+        formControlName="lastName"
+        autocomplete="family-name"
+      />
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="email">Email address</label>
+      <input
+        id="email"
+        class="field__input"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+      />
+    </div>
+
+    <!-- If more fields are needed, example:
+    <div class="field">
+      <label class="field__label" for="age">Age</label>
+      <input
+        id="age"
+        class="field__input"
+        type="number"
+        formControlName="age"
+        min="0"
+      />
+    </div>
+    -->
+
+    <button class="signup__submit" type="submit" [disabled]="isSubmitting()">
+      Sign up
+    </button>
+  </form>
+</section>
